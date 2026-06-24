@@ -1,4 +1,15 @@
 services:
+  api:
+    build:
+      context: ./backend
+    container_name: ai_knowledge_api
+    environment:
+      DATABASE_URL: postgresql://ai_user:ai_password@db:5432/ai_knowledge
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+
   db:
     image: pgvector/pgvector:pg17
     container_name: ai_knowledge_db
