@@ -2,9 +2,12 @@ from fastapi import FastAPI, UploadFile, File
 from app.db import get_connection
 from psycopg.rows import dict_row
 from app.text import chunk_text
+from pydantic import BaseModel
 
 app = FastAPI(title="AI Knowledge Platform API")
 
+class AskRequest(BaseModel):
+    question: str
 
 @app.get("/health")
 def health_check():
@@ -118,4 +121,36 @@ def search_chunks(q: str):
     return {
         "query": q,
         "results": results,
+    }
+
+@app.post("/ask")
+def ask_question(request: AskRequest):
+    with get_connection() as conn:
+        with conn.cursor(row_factory=dict_row) as cur:
+            cur.execute(
+                """
+                SELECT
+                    dc.id,
+                    dc.document_id,
+                    d.filename,
+                    dc.chunk_index,
+                    dc.content,
+                    ts_rank(
+                        to_tsvector('english', dc.content),
+                        plainto_tsquery('english', %s)
+                    ) AS rank
+                FROM document_chunks dc
+                JOIN documents d ON d.id = dc.document_id
+                WHERE to_tsvector('english', dc.content) @@ plainto_tsquery('english', %s)
+                ORDER BY rank DESC
+                LIMIT 5;
+                """,
+                (request.question, request.question),
+            )
+            context = cur.fetchall()
+
+    return {
+        "question": request.question,
+        "answer": "LLM generation is not enabled yet. Returning retrieved context only.",
+        "context": context,
     }
