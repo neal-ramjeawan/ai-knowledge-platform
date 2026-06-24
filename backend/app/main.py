@@ -7,6 +7,7 @@ from app.repositories.documents import (
     list_document_chunks,
     list_documents,
     search_chunks,
+    semantic_search_chunks,
 )
 from app.text import chunk_text
 
@@ -94,4 +95,14 @@ def ask_question(request: AskRequest):
         "question": request.question,
         "answer": "LLM generation is not enabled yet. Returning retrieved context only.",
         "context": context,
+    }
+
+@app.get("/semantic-search")
+def semantic_search(q: str):
+    with get_connection() as conn:
+        results = semantic_search_chunks(conn, q)
+
+    return {
+        "query": q,
+        "results": results,
     }
