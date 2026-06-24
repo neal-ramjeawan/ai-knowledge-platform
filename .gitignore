@@ -1,0 +1,16 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+.env
+
+# macOS
+.DS_Store
+
+# Node / frontend later
+node_modules/
+.next/
+out/
+
+# Local data
+*.db
