@@ -12,6 +12,9 @@ A local-first document ingestion and retrieval API built with FastAPI, PostgreSQ
 - Run the API and database with Docker Compose
 - Apply database schema using a versioned SQL migration
 - Use a Makefile for repeatable local development commands
+- Generate local embeddings for document chunks
+- Store embeddings in pgvector
+- Search chunks using semantic vector similarity
 
 ## Tech Stack
 
