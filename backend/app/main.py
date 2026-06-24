@@ -89,11 +89,11 @@ def search(q: str):
 @app.post("/ask")
 def ask_question(request: AskRequest):
     with get_connection() as conn:
-        context = search_chunks(conn, request.question)
+        context = semantic_search_chunks(conn, request.question)
 
     return {
         "question": request.question,
-        "answer": "LLM generation is not enabled yet. Returning retrieved context only.",
+        "answer": "LLM generation is not enabled yet. Returning semantic context only.",
         "context": context,
     }
 
