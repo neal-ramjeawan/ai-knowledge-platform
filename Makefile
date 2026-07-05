@@ -1,7 +1,7 @@
-.PHONY: up down logs migrate api-shell db-shell ps
+.PHONY: up down logs migrate api-shell db-shell ps frontend
 
 up:
-	docker-compose up --build -d
+	docker-compose up -d --build
 
 down:
 	docker-compose down
@@ -20,3 +20,6 @@ db-shell:
 
 ps:
 	docker-compose ps
+
+frontend:
+	cd frontend && npm install && npm run dev -- --host 0.0.0.0 --strictPort

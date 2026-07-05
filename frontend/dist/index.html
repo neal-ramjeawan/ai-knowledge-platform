@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI Knowledge Platform</title>
+    <script type="module" crossorigin src="/assets/index-BDnqboxC.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-BvDzSWVu.css">
+  </head>
+  <body>
+    <main>
+      <section class="panel">
+        <h1>AI Knowledge Platform</h1>
+        <p>Upload text, inspect stored documents, and search imported content.</p>
+
+        <form id="upload-form">
+          <input id="file-input" type="file" accept=".txt,.md,.json" required />
+          <div class="actions">
+            <button type="submit">Upload document</button>
+          </div>
+          <div id="upload-status" class="status">Choose a file to upload.</div>
+        </form>
+      </section>
+
+      <section class="panel">
+        <h2>Documents</h2>
+        <div id="documents-list" class="grid">Loading…</div>
+      </section>
+
+      <section class="panel">
+        <h2>Search</h2>
+        <form id="search-form">
+          <input id="search-input" type="text" placeholder="Search imported content" required />
+          <div class="actions">
+            <button type="submit">Keyword search</button>
+            <button class="secondary" type="button" id="semantic-search-button">Semantic search</button>
+          </div>
+          <div id="search-status" class="status">Run a search to inspect results.</div>
+        </form>
+        <pre id="search-results">{}</pre>
+      </section>
+    </main>
+
+  </body>
+</html>

@@ -36,3 +36,20 @@ FastAPI API Container
         |
         v
 PostgreSQL + pgvector Container
+
+## Frontend
+
+A Vite-based browser interface is available under [frontend](frontend) for uploading documents, viewing stored documents, and running keyword/semantic search against the API.
+
+### Run locally
+
+1. Start the backend and database with `make up`
+2. In the frontend folder, run `npm install` once
+3. Start the UI with `npm run dev`
+4. Open the local Vite URL shown in the terminal and upload a text file to confirm it appears in the document list
+
+## Development Notes
+
+- Backend tests: `cd backend && pytest -q`
+- Docker services: `make up` / `make down`
+- Database migrations: `make migrate`
