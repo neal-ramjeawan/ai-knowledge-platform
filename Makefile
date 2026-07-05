@@ -22,4 +22,4 @@ ps:
 	docker-compose ps
 
 frontend:
-	cd frontend && npm install && npm run dev -- --host 0.0.0.0 --strictPort
+	cd frontend && npm install && npm run dev -- --host 0.0.0.0 --port 5173

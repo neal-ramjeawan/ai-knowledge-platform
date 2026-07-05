@@ -27,6 +27,10 @@ A local-first document ingestion and retrieval API built with FastAPI, PostgreSQ
 - Docker Compose
 - Makefile
 
+## Screenshot
+
+![AI Knowledge Platform UI](docs/images/ai-knowledge-platform.png)
+
 ## Architecture
 
 Client / Swagger UI

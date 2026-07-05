@@ -3,6 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
 from app.db import get_connection
+from app.migrations import initialize_database
 from app.repositories.documents import (
     create_document_with_chunks,
     list_document_chunks,
@@ -13,6 +14,8 @@ from app.repositories.documents import (
 from app.text import chunk_text
 
 app = FastAPI(title="AI Knowledge Platform API")
+
+initialize_database()
 
 app.add_middleware(
     CORSMiddleware,

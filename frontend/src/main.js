@@ -91,6 +91,7 @@ uploadForm.addEventListener('submit', async (event) => {
     uploadStatusEl.textContent = `Uploaded ${data.chunk_count || 0} chunk(s).`;
     await loadDocuments();
     searchResultsEl.textContent = JSON.stringify(data, null, 2);
+    fileInput.value = '';
   } catch (error) {
     uploadStatusEl.textContent = `Upload failed: ${error.message}`;
   }
