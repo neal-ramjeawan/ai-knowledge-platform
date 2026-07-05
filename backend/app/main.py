@@ -1,8 +1,11 @@
+from contextlib import asynccontextmanager
+
 from fastapi import FastAPI, UploadFile, File
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
-from app.db import get_connection
+from app.db import DATABASE_URL, get_connection
+
 from app.migrations import initialize_database
 from app.repositories.documents import (
     create_document_with_chunks,
@@ -13,9 +16,14 @@ from app.repositories.documents import (
 )
 from app.text import chunk_text
 
-app = FastAPI(title="AI Knowledge Platform API")
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    if DATABASE_URL:
+        initialize_database()
+    yield
 
-initialize_database()
+
+app = FastAPI(title="AI Knowledge Platform API", lifespan=lifespan)
 
 app.add_middleware(
     CORSMiddleware,
